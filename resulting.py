@@ -64,7 +64,7 @@ hover_1 = HoverTool(
 	]
 )
 
-p1 = figure(plot_width=300, plot_height=300, x_axis_type='datetime',
+p1 = figure(plot_width=300, plot_height=300, x_axis_type=None,
             tools=[hover_1], title="(Hover for more information)")
 ticker = SingleIntervalTicker(interval=1, num_minor_ticks=0)
 ticker.desired_num_ticks = 1

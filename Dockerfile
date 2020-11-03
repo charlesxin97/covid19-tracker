@@ -13,8 +13,10 @@ RUN pip install --upgrade pip
 
 COPY requirements.txt /opt/app/requirements.txt
 
+COPY resulting.py /opt/app/resulting.py
+
 RUN pip install -r /opt/app/requirements.txt
 
-EXPOSE 5000
-
 WORKDIR covid19-tracker
+
+CMD ["bokeh", "serve", "--show", "/opt/app/resulting.py"]

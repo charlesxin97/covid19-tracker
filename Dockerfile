@@ -11,7 +11,9 @@ RUN cd covid19-tracker && yarn install
 
 RUN pip install --upgrade pip
 
-RUN pip install -r ./requirements.txt
+COPY requirements.txt /opt/app/requirements.txt
+
+RUN pip install -r /opt/app/requirements.txt
 
 EXPOSE 5000
 

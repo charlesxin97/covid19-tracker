@@ -2,7 +2,7 @@
 
 import pandas as pd
 from bokeh.models import DatePicker
-from bokeh.layouts import column
+from bokeh.layouts import column, row
 from bokeh.plotting import figure, curdoc
 from bokeh.models import Div, ColumnDataSource, HoverTool, SingleIntervalTicker, LinearAxis, Range1d
 from bokeh.io import show
@@ -30,12 +30,12 @@ The latest update date is {}""".format(latest_date),
             width=1000, height=100)
 
 # date picker
-date_picker = DatePicker(title='Select a Date', value="2020-08-01", min_date="2020-08-01", max_date="2020-12-31")
+date_picker = DatePicker(title="", value="2020-08-01", min_date="2020-08-01", max_date="2020-12-31")
 
 # answers
 selected_date = latest_date
-description = Div(text="""New cases on {}""".format(selected_date),
-            width=1000, height=100)
+description = Div(text="""New cases on {} (Hover for more information)""".format(selected_date),
+            width=1000, height=10)
 # p1
 total_cases = data_total['confirmed_cases']
 dates = data_total['date']
@@ -65,7 +65,7 @@ hover_1 = HoverTool(
 )
 
 p1 = figure(plot_width=300, plot_height=300, x_axis_type=None,
-            tools=[hover_1], title="(Hover for more information)")
+            tools=[hover_1], title="Number of new cases")
 ticker = SingleIntervalTicker(interval=1, num_minor_ticks=0)
 ticker.desired_num_ticks = 1
 x_axis = LinearAxis(ticker=ticker)
@@ -179,6 +179,6 @@ def call_back(attr, old, new):
 
 date_picker.on_change("value", call_back)
 # layout
-curdoc().add_root(column(intro, date_picker, description, p1, p2))
+curdoc().add_root(column(intro, date_picker, description, row(p1, p2)))
 
 #### labels and legends
